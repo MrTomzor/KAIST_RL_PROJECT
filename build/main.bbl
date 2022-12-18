@@ -5,4 +5,23 @@ John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
 \newblock Proximal policy optimization algorithms.
 \newblock 07 2017.
 
+\bibitem{emergence}
+Nicolas Manfred~Otto Heess, TB~Dhruva, Srinivasan Sriram, Jay Lemmon, Josh
+  Merel, Greg Wayne, Yuval Tassa, Tom Erez, Ziyun Wang, S.~M.~Ali Eslami,
+  Martin~A. Riedmiller, and David Silver.
+\newblock Emergence of locomotion behaviours in rich environments.
+\newblock {\em ArXiv}, abs/1707.02286, 2017.
+
+\bibitem{massively}
+N.~Rudin, David Hoeller, Philipp Reist, and Marco Hutter.
+\newblock Learning to walk in minutes using massively parallel deep
+  reinforcement learning.
+\newblock {\em ArXiv}, abs/2109.11978, 2021.
+
+\bibitem{stable-baselines3}
+Antonin Raffin, Ashley Hill, Adam Gleave, Anssi Kanervisto, Maximilian
+  Ernestus, and Noah Dormann.
+\newblock Stable-baselines3: Reliable reinforcement learning implementations.
+\newblock {\em Journal of Machine Learning Research}, 22(268):1--8, 2021.
+
 \end{thebibliography}

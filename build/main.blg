@@ -4,45 +4,45 @@ The top-level auxiliary file: main.aux
 The style file: unsrt.bst
 Database file #1: main.bib
 Warning--empty journal in ppo
-You've used 1 entry,
+You've used 4 entries,
             1791 wiz_defined-function locations,
-            450 strings with 3652 characters,
-and the built_in function-call counts, 207 in all, are:
-= -- 11
-> -- 17
+            467 strings with 4352 characters,
+and the built_in function-call counts, 911 in all, are:
+= -- 54
+> -- 89
 < -- 0
-+ -- 6
-- -- 5
-* -- 16
-:= -- 44
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 1
++ -- 31
+- -- 27
+* -- 77
+:= -- 180
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 4
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 8
-empty$ -- 15
-format.name$ -- 5
-if$ -- 38
+cite$ -- 5
+duplicate$ -- 33
+empty$ -- 63
+format.name$ -- 27
+if$ -- 180
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 1
-pop$ -- 5
+int.to.str$ -- 4
+missing$ -- 4
+newline$ -- 23
+num.names$ -- 4
+pop$ -- 8
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 3
+skip$ -- 14
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
+substring$ -- 9
+swap$ -- 3
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 1
-width$ -- 2
-write$ -- 11
+while$ -- 5
+width$ -- 5
+write$ -- 44
 (There was 1 warning)
