@@ -19,8 +19,8 @@
 \maketitle
 
 \section{Background}
-Reinforcement learning (RL) has widely been used in creating control policies for robots for a wide variety of problems, such as walking of humanoid robots \cite{ppo}, spider-like robots \cite{emergence} or quadruped robots \cite{massively}.
-In this project, I concerned myself with using a RL algorithm to teach locomotion of a modular snake robot in various terrains.
+Reinforcement learning (RL) has widely been used for creating control policies for robots for a wide variety of tasks, such as locomotion of humanoid robots \cite{ppo}, spider-like robots \cite{emergence} or quadruped robots \cite{massively}.
+In this project, I concerned myself with using RL algorithms to learn locomotion of a modular snake robot in various terrains.
 
 The modular robot taught in simulation in this project is based on the hardware realization of a real modular snake robot, shown in Figure \ref{fig:hw}.
 The robot system was constructed by me and my 3 other colleagues at the Czech Technical University and features very affordable parts, open-source design and simple communication and software stack.
@@ -48,19 +48,22 @@ The goal of this project is to:
 
 \section{Methods}
 \subsection{Custom AI Gym Environment Construction}
-For the purpose of this project, I developed a new AI gym environment from scratch.
+For the purpose of this project, I developed a custom AI gym environment from scratch. Here is the main description of the developed environment:
 \begin{itemize}
-  \item \textbf{General description:} The environment uses the PyBullet physics engine for its physics simulation. 
-The new environment constructor takes as input the desired configuration of modules in the robot (specified by a string of tuples (module type, module orientation w.r.t. the previous module) and creates an URDF file which it uses to spawn the snake robot.
+  \item \textbf{General features:} The environment uses the PyBullet physics engine for its physics simulation. 
+The environment constructor takes as input the desired configuration of modules in the robot (specified by a string of tuples (module type, module orientation w.r.t. the previous module) and creates an URDF file which it uses to spawn the snake robot.
 Furthermore, the environment currently supports 2 different terrains on which the robot can learn to move.
-    These terrains, which I created using the open-source software Blender and are shown in Figure \ref{fig:terrains} are \textit{stairs}, and \textit{bumps} which is randomly rotated around the $z$ axis on every reset to simulate random bumpy terrain for the robot.
+    I created 2 terrains using the open-source software Blender and these terrains are shown in Figure \ref{fig:terrains}. The terrain \textit{bumps} is randomly rotated around the $z$ axis on every reset to simulate random bumpy terrain for the robot.
+    The number of actions and observation naturally depends on the number of servo modules $n_{servo}$ and wheel modules $n_{drive}$.
   \item \textbf{Observations:} The environment has $3+ n_{servo}$ continuous observations. These are an ensemble of roll, pitch, yaw of the robot (simulating measurements from an affordable IMU sensor, although without noise), and the current angle of every servo module in the robot.
   \item \textbf{Actions:}  The environment has $n_{servo} + n_{drive}$ actions, with each servo having a position reference input (not velocities), and each drive module having a velocity reference input. The position and velocity control is done by pybullet for the robot joints.
-  \item \textbf{Reward:} The reward differs for the 2 scenarios. For teaching to move forward (in $x$ direction) on bumpy terrain, the robot gets a reward $r_{bumps} = 100*dx - 50*|dy|$ every timestep. For moving on stairs, the robot is motivated to lift its head to climb the stairs by adding a reward for moving in the $z$ direction, so its reward is $r_{stairs} = 100*dx - 50*|dy| + 200*dz$.
+    Additionally, the physics simulation does 5 steps for every environment step (=for every action) to simulate a low control bandwidth, which is present in the real-world robot, and to make the movements less jittery.
+  \item \textbf{Reward:} The reward differs for the 2 terrain types. For teaching to move forward (in $x$ direction) on bumpy terrain, the robot gets a reward $r_{bumps} = 100*dx - 50*|dy|$ every timestep. For moving on stairs, the robot is motivated to lift its head to climb the stairs by adding a reward for moving in the $z$ direction, so its reward is $r_{stairs} = 100*dx - 50*|dy| + 200*dz$.
     I experimented with adding a penalty for rotation along the $z$ axis to force the robot to move forward more quickly, but this proved to be counter productive.
     Additionally, in both terrains, the agent gets a large fixed reward if it reaches the end of the terrain in the $x$ direction.
   \item \textbf{Reality gap:} The masses and moments of inertia of robot links, max speed of wheels and max force and speed of the servo modules were just approximately estimated. Also the real-world servos feature a spring for SEA actuation, which is not modeled in the simulation servos.
     Therefore, this simulation is more of a proof of concept and would need additional work to be deployable 1:1 on the real hardware.
+    This would require a lot of additional work in the form of a larger project.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -68,18 +71,18 @@ Furthermore, the environment currently supports 2 different terrains on which th
   \centering
   % include first image
   \includegraphics[width=.95\linewidth]{fig/bumps.png}  
-  \caption{Terrain \textit{bumps}}
+  \caption{The terrain type - \textit{bumps}}
   \label{fig:sub-first}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
   \centering
   % include second image
   \includegraphics[width=.95\linewidth]{fig/stairs.png}  
-  \caption{Terrain \textit{stairs}}
+  \caption{The terrain type - \textit{stairs}}
   \label{fig:sub-second}
 \end{subfigure}
   \caption{The two learning scenarios. 
-  A configuration with 2 wheel modules and 2 servos is used for the \textit{bumps} terrain and a longer configuration with 3 wheel modules and 4 servos is used for the \textit{stairs} terrain.
+  A configuration with 2 wheel modules and 2 servos is used for the \textit{bumps} terrain and a longer robot configuration with 3 wheel modules and 4 servos is used for the \textit{stairs} terrain.
   The \textit{bumps} terrain is also randomly rotated around the vertical axis at every reset. }
 \label{fig:terrains}
 \end{figure}
@@ -88,7 +91,7 @@ Furthermore, the environment currently supports 2 different terrains on which th
 % First, I experimented with the algorithms from the library and found PPO \cite{ppo} to work the best, A2C to work slightly for the bumpy terrain but not for stairs, and the other algorithms were not learning anything meaningful for the constructed environment.
 % For training in both tasks, I decided to use the library TODO.
 % Therefore, in this paper I showcase 2 experiments.
-For training the robot on the 2 terrain types, I used the open-source library stable-baselines3, which allows easy implementation of RL algorithms such as A2C, PPO, DDPG etc.
+For training the robot on the 2 terrain types, I used the open-source library stable-baselines3 \cite{stable-baselines3}, which allows easy implementation of RL algorithms such as A2C, PPO, DDPG, etc.
 I experimented for some time with various algorithms, and found PPO and A2C to work best for this environment, which is why I chose them for the demonstration experiments.
 Both are using a Multi-Layer Perceptron (MLP) policy in all cases.
 
@@ -105,7 +108,7 @@ I also used the train() function from stable-baselines3 and trained for 300 epis
 % Second round - bumps, 1 algo, 2 different configurations (2g)
 % 3rd round - bumps, 2 algo, 2 different configurations (4g)
 The results of learning on \textit{bumpy terrain} can be seen in Figure \ref{fig:bumps}.
-In this experiment, PPO was learning more slowly than A2C, but A2C was somewhat inconsistent in the episodes, while PPO was steadily increasing the episode reward.
+In this experiment, PPO was learning more slowly than A2C, but A2C was somewhat inconsistent in the episode rewards, while PPO was steadily increasing the episode reward.
 Both methods learned fast compared to the \textit{stairs} terrain, which is understandable, since this task is substantially easier.
 % PPO learned a policy much faster than A2C and TODO.
 
@@ -158,17 +161,17 @@ I have also published a video of the PPO agent after 300 episodes here: \href{ht
 \section{Discussion}
 I believe it is a great success that I managed to construct a working gym environment and implement the PPO algorithm for it and succesfully make the model learn a motion that can climb the stairs.
 
-An interesting thing is why PPO learned more slowly than A2C in this example.
+An interesting thing is why PPO learned more slowly than A2C in the \textit{bumps} terrain.
 From observing the two learning processess in the PyBullet GUI, it seemed to me that A2C does not produce such noisy action signals as PPO, meaning that PPO in the stable-baselines3 likely uses some action noise, while A2C does not.
 Due to time constraints, I could not have investigated this further.
 
-As can be seen in the video in the Results section showing the PPO model scale stairs, the robot in that case produces a sort of "oscillatory" motion where it throws its body from side to side.
-I was worried if a simple MLP-policy would be sufficient to learn stair climbing and if it did not rather need a recurrent policy, as the robot would need to develop some "gait" which would need some recurrence.
-However, it seems to me, that thanks to the complexity of the body of the robot, and since all joints of the servos are controlled AND observed, and multiple physics steps are happening between each environment step, the robot was able to form this kind of gait without any recurrence in the model itself.
+Another notable thing is that, as can be seen in the video in the Results section showing the PPO model scale stairs, the robot in that case produces a sort of "oscillatory" motion where it throws its body from side to side.
+I was worried if a simple MLP-policy would be sufficient to learn stair climbing and if it did not rather need a recurrent policy, as the robot would need to develop some "gait" which would need some recurrence to move up stairs.
+However, it seems to me that thanks to the complexity of the body of the robot, and since all joints of the servos are controlled AND observed, and multiple physics steps are happening between each environment step, the robot was able to form this kind of gait without any recurrence in the model itself.
 My explanation for this is that the MLP-policy model likely learned a gait such as (body bent left $=>$ bend body right and up, body bent right $=>$ bend body left and down).
-This seems fascinating, that the learning solved the recurrence problem in this way.
+The possible fact that the learning solved the recurrence problem in this way is fascinating.
 
-Future work would certainly be interesting.
+There are many ways this project can be built upon.
 Firstly, I would like to work more closely with the real hardware and try running the learned policy on a real robot, and then seeing the discrepancies and working on bridging the reality gap as much as possible. 
 Additionally, I would like to, in the future, add some form of touch/force perception in a physically realizable manner, for example using tiny bumpers/buttons in the front of the robot or on the servo module, or also measuring the current and velocity of the wheels to infer if they are touching ground or not.
 I believe that would make the robot learn to climb stairs/rocks even better.
