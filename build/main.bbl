@@ -18,10 +18,4 @@ N.~Rudin, David Hoeller, Philipp Reist, and Marco Hutter.
   reinforcement learning.
 \newblock {\em ArXiv}, abs/2109.11978, 2021.
 
-\bibitem{stable-baselines3}
-Antonin Raffin, Ashley Hill, Adam Gleave, Anssi Kanervisto, Maximilian
-  Ernestus, and Noah Dormann.
-\newblock Stable-baselines3: Reliable reinforcement learning implementations.
-\newblock {\em Journal of Machine Learning Research}, 22(268):1--8, 2021.
-
 \end{thebibliography}
