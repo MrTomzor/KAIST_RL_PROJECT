@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex build/main"] 1671407634 "build/main.aux" "build/main.bbl" "build/main" 1671407932
+["bibtex build/main"] 1671407634 "build/main.aux" "build/main.bbl" "build/main" 1671408136
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "build/main.aux" 1671407932 5077 1bd0ca399affc6b8cf89db105a44acfc "pdflatex"
+  "build/main.aux" 1671408136 5077 1bd0ca399affc6b8cf89db105a44acfc "pdflatex"
   "main.bib" 1671369189 1258 970b68f8ef0a18fc34049fdd829aeff0 ""
   (generated)
   "build/main.bbl"
   "build/main.blg"
-["pdflatex"] 1671407931 "main.tex" "build/main.pdf" "main" 1671407932
+["pdflatex"] 1671408135 "main.tex" "build/main.pdf" "main" 1671408136
   "/etc/texmf/web2c/texmf.cnf" 1641580499 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/tom/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk" 1654247422 11524 ec61e4d981d90d6a399662af67ba8d39 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -112,9 +112,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1641720392 4476530 6aad7ce3fee4e65f7335f6fedaba5934 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1641720397 7717121 e7af1de5125e7396914a836809711c1e ""
-  "build/main.aux" 1671407932 5077 1bd0ca399affc6b8cf89db105a44acfc "pdflatex"
+  "build/main.aux" 1671408136 5077 1bd0ca399affc6b8cf89db105a44acfc "pdflatex"
   "build/main.bbl" 1671407634 1038 bbb41a1cf1b680dd2bc1dbb9d3f1e714 "bibtex build/main"
-  "build/main.out" 1671407932 425 64aa0995e03b506e56dd51fe01238b7e "pdflatex"
+  "build/main.out" 1671408136 425 64aa0995e03b506e56dd51fe01238b7e "pdflatex"
   "fig/bumps.png" 1671395006 20125 57cf5b0a628da3980ad8682b7c6ab9d0 ""
   "fig/snek_real.jpg" 1671394211 1785369 29e868d533480f5d613e6b7e3972a4fe ""
   "fig/stairs.png" 1671395817 20203 b0716775683f927b65ca2a02057e945d ""
@@ -122,9 +122,9 @@
   "figc/Bumpy_terrain_learning_100ep_ppo.png" 1671393460 23120 3a7dcaaa123098e67d65cfd14c83011b ""
   "figc/Stairs_climbing_learning_300ep_final.png" 1671393492 34842 c8c8487899c415aa643d05de13c48fd3 ""
   "figc/Stairs_climbing_learning_300ep_final_a2c.png" 1671393526 33113 4d1e5d038a0489054852f16ba381077a ""
-  "main.tex" 1671407930 14275 d11cc83715cf7409195090454ce01933 ""
+  "main.tex" 1671408135 14302 ab4ad7d3a2bf8b69d30fe4ba330ac9e2 ""
   (generated)
-  "build/main.log"
-  "build/main.pdf"
-  "build/main.out"
   "build/main.aux"
+  "build/main.pdf"
+  "build/main.log"
+  "build/main.out"
